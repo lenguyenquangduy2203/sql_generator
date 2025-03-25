@@ -8,7 +8,7 @@ def build_sql_query(sqn: str) -> str:
     if (_type == QueryType.UNKNOWN):
         return ""
     
-    ctx, generator = use_generator(sqn, _type)
-    raw_sql_query = generator.generate(ctx)
+    generator = use_generator(sqn, _type)
+    raw_sql_query = generator.generate()
 
     return raw_sql_query
