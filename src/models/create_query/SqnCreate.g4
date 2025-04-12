@@ -25,3 +25,19 @@ NULL: 'null' ;
 WS: [ \t\r\n]+ -> skip ;
 
 // Define Syntax For The Query Below
+
+createQuery: '{' '"create"' ':' (database | table) '}' ;
+
+database: '{' '"database"' ':' STRING (',' '"modifiers"' ':' '[' databaseModifier (',' databaseModifier)* ']')? '}' ;
+
+databaseModifier: '"if_not_exists"' | '"cascade"' | '{' '"encoding"' ':' 'UTF-' ('8' | '16' | '32') '}'  | STRING ;
+
+table: '{' '"table"' ':' STRING (',' '"modifiers"' ':' '[' tableModifier (',' tableModifier)* ']')? '}' ',' '"columns"' ':' '[' columnDef (',' columnDef)* ']' ;
+
+tableModifier: '"if_not_exists"' | '"temporary"' | '"unlogged"' | STRING ;
+
+columnDef: '{' '"name"' ':' STRING ',' '"type"' ':' columnType (',' '"constraints"' ':' '[' columnConstraint (',' columnConstraint)* ']')? '}' ;
+
+columnType: '"int"' | '"long"' | '"string"' | '"uuid"' | '"datetime"' | STRING ;
+
+columnConstraint: '"primary"' | '"unique"' | '"required"' | '"auto_increment"' | '{' '"default"' ':' STRING '}' | '{' '"reference"' ':' STRING '}' | STRING ;
