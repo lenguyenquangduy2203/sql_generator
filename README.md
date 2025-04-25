@@ -33,7 +33,8 @@ A simple multi-page Dash web app.
 4. **Run the Application**: Run in the root folder `sql_generator`:
 
     ```bash
-        python3 app.py
+        python3 app.py (mac)
+        python app.py (window)
     ```
 
 5. **Access the App**: Open your browser and go to `http://127.0.0.1:8050`.
