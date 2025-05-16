@@ -8,7 +8,7 @@ INT: DIGIT+;
 FLOAT: DIGIT+ '.' DIGIT+;
 STRING: '"' .*? '"';
 BOOLEAN: 'true' | 'false';
-DATE: DIGIT{4} '-' DIGIT{2} '-' DIGIT{2};
+DATE: DIGIT DIGIT DIGIT DIGIT '-' DIGIT DIGIT '-' DIGIT DIGIT;
 LONG: DIGIT+;
 
 WS: [ \t\r\n]+ -> skip;

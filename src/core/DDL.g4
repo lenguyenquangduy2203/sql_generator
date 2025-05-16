@@ -2,4 +2,12 @@ parser grammar DDL;
 
 import Common;
 
-ddl: // define parser rules here
+ddl: tableName '(' columnDef (',' columnDef)* ')';
+
+tableName: IDENTIFIER;
+
+columnDef: PK ':' typeSpec | FK ':' typeSpec | STRING ':' typeSpec;
+
+PK: '*';
+
+FK: '@' STRING;
