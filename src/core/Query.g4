@@ -2,38 +2,24 @@ parser grammar Query;
 
 import Common;
 
-options {tokenVocab = Common;}
+options { tokenVocab = Common; }
 
-query: selectQuery| updateQuery| deleteQuery;
+query: tableSelection (';' tableSelection)* whereClause?;
 
-selectQuery: 'SELECT' selectList   'FROM' tableName  whereClause?  groupByClause? orderByClause? limitClause?;
+tableSelection: tableName '~' selectColumns;
 
-updateQuery: 'UPDATE' tableName'SET' assignment (',' assignment)* whereClause?;
+selectColumns: columnName (',' columnName)*;
 
-deleteQuery: 'DELETE' 'FROM' tableName whereClause?;
+whereClause: '?' condition;
 
-selectList : '*' | columnName (',' columnName)*;
+condition: predicate| condition 'AND' condition| condition 'OR' condition| '(' condition ')';
+
+predicate: columnName operator value| columnName 'BETWEEN' value 'AND' value| columnName 'IN' '(' value (',' value)* ')'| columnName 'LIKE' STRING| columnName 'IS' 'NULL';
+
+operator: '=' | '!=' | '<' | '>' | '<=' | '>=';
+
+value: literal | columnName;
 
 columnName: IDENTIFIER ('.' IDENTIFIER)?;
 
 tableName: IDENTIFIER;
-
-whereClause: 'WHERE' condition;
-
-condition: predicate| condition 'AND' condition| condition 'OR' condition| '(' condition ')';
-
-predicate: columnName operator value| columnName 'BETWEEN' value 'AND' value | columnName 'IN' '(' value (',' value)* ')'| columnName 'LIKE' STRING| columnName 'IS' 'NULL';
-
-operator: '=' | '!=' | '<' | '>' | '<=' | '>=' ;
-
-value: literal| columnName;
-
-assignment: columnName '=' value;
-
-groupByClause: 'GROUP' 'BY' columnName (',' columnName)*;
-
-orderByClause: 'ORDER' 'BY' orderItem (',' orderItem)*;
-
-orderItem: columnName ('ASC' | 'DESC')?;
-
-limitClause: 'LIMIT' INT (',' INT)?;
