@@ -2,8 +2,8 @@ grammar DML;
 
 dml: table_definition value_entries+;
 
-// Can take column name as optional, table name is a must
-table_definition: table_name ( '(' column_name (',' column_name)* ')' )?;
+// Take column name, table name are a must
+table_definition: table_name '(' column_name (',' column_name)* ')';
 
 // Starts with '<<', followed by a parenthesized list of values
 value_entries: '<<' '(' value (',' value)* ')';
