@@ -2,17 +2,15 @@ parser grammar Query;
 
 import Common;
 
-options { tokenVocab = Common;}
+options { tokenVocab = Common; }
 
-query: tableQuery (joinQuery)* whereClause?;
+query: tableSelection (';' tableSelection)* whereClause?;
 
-tableQuery: tableName '~' selectColumns;
-
-joinQuery: ';' tableName '~' selectColumns;
+tableSelection: tableName '~' selectColumns;
 
 selectColumns: columnName (',' columnName)*;
 
-whereClause : '?' condition;
+whereClause: '?' condition;
 
 condition: predicate| condition 'AND' condition| condition 'OR' condition| '(' condition ')';
 
@@ -20,7 +18,7 @@ predicate: columnName operator value| columnName 'BETWEEN' value 'AND' value| co
 
 operator: '=' | '!=' | '<' | '>' | '<=' | '>=';
 
-value: literal| columnName;
+value: literal | columnName;
 
 columnName: IDENTIFIER ('.' IDENTIFIER)?;
 
