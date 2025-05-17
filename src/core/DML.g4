@@ -1,18 +1,21 @@
 grammar DML;
 
-dml: statement+;
-statement: insertSentence;
+dml: table_definition value_entries+;
 
-insertSentence: 'INSERT' 'INTO' table_name column_list? 'VALUES' value_list;
+// Can take column name as optional, table name is a must
+table_definition: table_name ( '(' column_name (',' column_name)* ')' )?;
+
+// Starts with '<<', followed by a parenthesized list of values
+value_entries: '<<' '(' value (',' value)* ')';
 
 table_name: ID;
-column_list: '(' column_name (',' column_name)* ')'; //Can accept multiple parenthesis such as: ('A', 'B'), ('C', 'D')
 column_name: ID;
-value_list: '(' value (',' value)* ')' | '(' value (',' value)* ',' value_list ')';
+
+// Can be strings, numbers, or NULL
 value: STRING | NUMBER | NULL;
 
 //ID: [a-zA-Z_][a-zA-Z_0-9]*;
-//STRING: '\'' (~'\'' | '\'\'' )* '\'';
+//STRING: '\'' ( ~[\'] | '\'\'' )* '\'';
 //NUMBER: [0-9]+ ('.' [0-9]+)?;
 //NULL: 'NULL';
 
