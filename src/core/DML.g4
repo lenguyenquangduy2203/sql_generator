@@ -1,7 +1,7 @@
 parser grammar DML;
 
 import Common;
-options {tokenVocab = Common;}
+options { tokenVocab = Common; }
 
 dml: table_definition value_entries+;
 
