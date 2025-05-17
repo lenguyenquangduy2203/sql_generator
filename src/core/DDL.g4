@@ -2,6 +2,8 @@ parser grammar DDL;
 
 import Common;
 
+options { tokenVocab = Common; }
+
 ddl: tableName '(' columnDef (',' columnDef)* ')';
 
 tableName: IDENTIFIER;
