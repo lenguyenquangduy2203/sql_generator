@@ -10,6 +10,7 @@ STRING: '"' .*? '"';
 BOOLEAN: 'true' | 'false';
 DATE: DIGIT DIGIT DIGIT DIGIT '-' DIGIT DIGIT '-' DIGIT DIGIT;
 LONG: DIGIT+;
+NULL: 'null';
 
 WS: [ \t\r\n]+ -> skip;
 

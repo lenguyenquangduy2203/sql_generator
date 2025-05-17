@@ -1,4 +1,7 @@
-grammar DML;
+parser grammar DML;
+
+import Common;
+options {tokenVocab = Common;}
 
 dml: table_definition value_entries+;
 
@@ -8,15 +11,9 @@ table_definition: table_name '(' column_name (',' column_name)* ')';
 // Starts with '<<', followed by a parenthesized list of values
 value_entries: '<<' '(' value (',' value)* ')';
 
-table_name: ID;
-column_name: ID;
+table_name: IDENTIFIER;
+column_name: IDENTIFIER;
 
-// Can be strings, numbers, or NULL
-value: STRING | NUMBER | NULL;
+// Can be strings, numbers (integer, float or long), or NULL
+value: STRING | INT | FLOAT | LONG | NULL;
 
-//ID: [a-zA-Z_][a-zA-Z_0-9]*;
-//STRING: '\'' ( ~[\'] | '\'\'' )* '\'';
-//NUMBER: [0-9]+ ('.' [0-9]+)?;
-//NULL: 'NULL';
-
-//WS: [ \t\r\n]+ -> skip;
