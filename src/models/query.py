@@ -57,7 +57,7 @@ class ParenCondition(Condition):
         raise NotImplementedError("ParenCondition.to_sql() logic has not yet been implemented")
     
 class QueryModel(SQNModel):
-    def __init__(self, selections: dict[str, list[str]], conditions: Condition) -> None:
+    def __init__(self, selections: dict[str, list[str]], conditions: Condition | None) -> None:
         super().__init__()
         self.selections = selections
         self.conditions = conditions
