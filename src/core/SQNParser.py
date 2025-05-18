@@ -2,11 +2,9 @@
 # encoding: utf-8
 from antlr4 import *
 from io import StringIO
+from typing import TextIO
 import sys
-if sys.version_info[1] > 5:
-	from typing import TextIO
-else:
-	from typing.io import TextIO
+
 
 def serializedATN():
     return [
@@ -184,14 +182,14 @@ class SQNParser ( Parser ):
     class ProgramContext(ParserRuleContext):
         __slots__ = 'parser'
 
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1): # type: ignore
             super().__init__(parent, invokingState)
             self.parser = parser
 
         def EOF(self):
             return self.getToken(SQNParser.EOF, 0)
 
-        def statement(self, i:int=None):
+        def statement(self, i:int=None): # type: ignore
             if i is None:
                 return self.getTypedRuleContexts(SQNParser.StatementContext)
             else:
@@ -203,15 +201,15 @@ class SQNParser ( Parser ):
 
         def enterRule(self, listener:ParseTreeListener):
             if hasattr( listener, "enterProgram" ):
-                listener.enterProgram(self)
+                listener.enterProgram(self) # type: ignore
 
         def exitRule(self, listener:ParseTreeListener):
             if hasattr( listener, "exitProgram" ):
-                listener.exitProgram(self)
+                listener.exitProgram(self) # type: ignore
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitProgram" ):
-                return visitor.visitProgram(self)
+                return visitor.visitProgram(self) # type: ignore
             else:
                 return visitor.visitChildren(self)
 
@@ -220,20 +218,20 @@ class SQNParser ( Parser ):
 
     def program(self):
 
-        localctx = SQNParser.ProgramContext(self, self._ctx, self.state)
+        localctx = SQNParser.ProgramContext(self, self._ctx, self.state) # type: ignore
         self.enterRule(localctx, 0, self.RULE_program)
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 43 
-            self._errHandler.sync(self)
-            _la = self._input.LA(1)
+            self._errHandler.sync(self) # type: ignore
+            _la = self._input.LA(1) # type: ignore
             while True:
                 self.state = 42
                 self.statement()
                 self.state = 45 
-                self._errHandler.sync(self)
-                _la = self._input.LA(1)
+                self._errHandler.sync(self) # type: ignore
+                _la = self._input.LA(1) # type: ignore
                 if not (_la==1):
                     break
 
@@ -241,8 +239,8 @@ class SQNParser ( Parser ):
             self.match(SQNParser.EOF)
         except RecognitionException as re:
             localctx.exception = re
-            self._errHandler.reportError(self, re)
-            self._errHandler.recover(self, re)
+            self._errHandler.reportError(self, re) # type: ignore
+            self._errHandler.recover(self, re) # type: ignore
         finally:
             self.exitRule()
         return localctx
@@ -251,7 +249,7 @@ class SQNParser ( Parser ):
     class StatementContext(ParserRuleContext):
         __slots__ = 'parser'
 
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1): # type: ignore
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -272,15 +270,15 @@ class SQNParser ( Parser ):
 
         def enterRule(self, listener:ParseTreeListener):
             if hasattr( listener, "enterStatement" ):
-                listener.enterStatement(self)
+                listener.enterStatement(self) # type: ignore
 
         def exitRule(self, listener:ParseTreeListener):
             if hasattr( listener, "exitStatement" ):
-                listener.exitStatement(self)
+                listener.exitStatement(self) # type: ignore
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitStatement" ):
-                return visitor.visitStatement(self)
+                return visitor.visitStatement(self) # type: ignore
             else:
                 return visitor.visitChildren(self)
 
@@ -289,12 +287,12 @@ class SQNParser ( Parser ):
 
     def statement(self):
 
-        localctx = SQNParser.StatementContext(self, self._ctx, self.state)
+        localctx = SQNParser.StatementContext(self, self._ctx, self.state) # type: ignore
         self.enterRule(localctx, 2, self.RULE_statement)
         try:
             self.state = 52
-            self._errHandler.sync(self)
-            la_ = self._interp.adaptivePredict(self._input,1,self._ctx)
+            self._errHandler.sync(self) # type: ignore
+            la_ = self._interp.adaptivePredict(self._input,1,self._ctx) # type: ignore
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 49
@@ -316,8 +314,8 @@ class SQNParser ( Parser ):
 
         except RecognitionException as re:
             localctx.exception = re
-            self._errHandler.reportError(self, re)
-            self._errHandler.recover(self, re)
+            self._errHandler.reportError(self, re) # type: ignore
+            self._errHandler.recover(self, re) # type: ignore
         finally:
             self.exitRule()
         return localctx
@@ -326,7 +324,7 @@ class SQNParser ( Parser ):
     class DdlContext(ParserRuleContext):
         __slots__ = 'parser'
 
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1): # type: ignore
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -337,7 +335,7 @@ class SQNParser ( Parser ):
         def LPAREN(self):
             return self.getToken(SQNParser.LPAREN, 0)
 
-        def columnDef(self, i:int=None):
+        def columnDef(self, i:int=None): # type: ignore
             if i is None:
                 return self.getTypedRuleContexts(SQNParser.ColumnDefContext)
             else:
@@ -347,7 +345,7 @@ class SQNParser ( Parser ):
         def RPAREN(self):
             return self.getToken(SQNParser.RPAREN, 0)
 
-        def COMMA(self, i:int=None):
+        def COMMA(self, i:int=None): # type: ignore
             if i is None:
                 return self.getTokens(SQNParser.COMMA)
             else:
@@ -358,15 +356,15 @@ class SQNParser ( Parser ):
 
         def enterRule(self, listener:ParseTreeListener):
             if hasattr( listener, "enterDdl" ):
-                listener.enterDdl(self)
+                listener.enterDdl(self) # type: ignore
 
         def exitRule(self, listener:ParseTreeListener):
             if hasattr( listener, "exitDdl" ):
-                listener.exitDdl(self)
+                listener.exitDdl(self) # type: ignore
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitDdl" ):
-                return visitor.visitDdl(self)
+                return visitor.visitDdl(self) # type: ignore
             else:
                 return visitor.visitChildren(self)
 
@@ -375,7 +373,7 @@ class SQNParser ( Parser ):
 
     def ddl(self):
 
-        localctx = SQNParser.DdlContext(self, self._ctx, self.state)
+        localctx = SQNParser.DdlContext(self, self._ctx, self.state) # type: ignore
         self.enterRule(localctx, 4, self.RULE_ddl)
         self._la = 0 # Token type
         try:
@@ -387,23 +385,23 @@ class SQNParser ( Parser ):
             self.state = 56
             self.columnDef()
             self.state = 61
-            self._errHandler.sync(self)
-            _la = self._input.LA(1)
+            self._errHandler.sync(self) # type: ignore
+            _la = self._input.LA(1) # type: ignore
             while _la==20:
                 self.state = 57
                 self.match(SQNParser.COMMA)
                 self.state = 58
                 self.columnDef()
                 self.state = 63
-                self._errHandler.sync(self)
-                _la = self._input.LA(1)
+                self._errHandler.sync(self) # type: ignore
+                _la = self._input.LA(1) # type: ignore
 
             self.state = 64
             self.match(SQNParser.RPAREN)
         except RecognitionException as re:
             localctx.exception = re
-            self._errHandler.reportError(self, re)
-            self._errHandler.recover(self, re)
+            self._errHandler.reportError(self, re) # type: ignore
+            self._errHandler.recover(self, re) # type: ignore
         finally:
             self.exitRule()
         return localctx
@@ -412,7 +410,7 @@ class SQNParser ( Parser ):
     class TableNameContext(ParserRuleContext):
         __slots__ = 'parser'
 
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1): # type: ignore
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -424,15 +422,15 @@ class SQNParser ( Parser ):
 
         def enterRule(self, listener:ParseTreeListener):
             if hasattr( listener, "enterTableName" ):
-                listener.enterTableName(self)
+                listener.enterTableName(self) # type: ignore
 
         def exitRule(self, listener:ParseTreeListener):
             if hasattr( listener, "exitTableName" ):
-                listener.exitTableName(self)
+                listener.exitTableName(self) # type: ignore
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitTableName" ):
-                return visitor.visitTableName(self)
+                return visitor.visitTableName(self) # type: ignore
             else:
                 return visitor.visitChildren(self)
 
@@ -441,7 +439,7 @@ class SQNParser ( Parser ):
 
     def tableName(self):
 
-        localctx = SQNParser.TableNameContext(self, self._ctx, self.state)
+        localctx = SQNParser.TableNameContext(self, self._ctx, self.state) # type: ignore
         self.enterRule(localctx, 6, self.RULE_tableName)
         try:
             self.enterOuterAlt(localctx, 1)
@@ -449,8 +447,8 @@ class SQNParser ( Parser ):
             self.match(SQNParser.IDENTIFIER)
         except RecognitionException as re:
             localctx.exception = re
-            self._errHandler.reportError(self, re)
-            self._errHandler.recover(self, re)
+            self._errHandler.reportError(self, re) # type: ignore
+            self._errHandler.recover(self, re) # type: ignore
         finally:
             self.exitRule()
         return localctx
@@ -459,7 +457,7 @@ class SQNParser ( Parser ):
     class ColumnDefContext(ParserRuleContext):
         __slots__ = 'parser'
 
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1): # type: ignore
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -484,15 +482,15 @@ class SQNParser ( Parser ):
 
         def enterRule(self, listener:ParseTreeListener):
             if hasattr( listener, "enterColumnDef" ):
-                listener.enterColumnDef(self)
+                listener.enterColumnDef(self) # type: ignore
 
         def exitRule(self, listener:ParseTreeListener):
             if hasattr( listener, "exitColumnDef" ):
-                listener.exitColumnDef(self)
+                listener.exitColumnDef(self) # type: ignore
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitColumnDef" ):
-                return visitor.visitColumnDef(self)
+                return visitor.visitColumnDef(self) # type: ignore
             else:
                 return visitor.visitChildren(self)
 
@@ -501,12 +499,12 @@ class SQNParser ( Parser ):
 
     def columnDef(self):
 
-        localctx = SQNParser.ColumnDefContext(self, self._ctx, self.state)
+        localctx = SQNParser.ColumnDefContext(self, self._ctx, self.state) # type: ignore
         self.enterRule(localctx, 8, self.RULE_columnDef)
         try:
             self.state = 78
-            self._errHandler.sync(self)
-            token = self._input.LA(1)
+            self._errHandler.sync(self) # type: ignore
+            token = self._input.LA(1) # type: ignore
             if token in [15]:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 68
@@ -541,8 +539,8 @@ class SQNParser ( Parser ):
 
         except RecognitionException as re:
             localctx.exception = re
-            self._errHandler.reportError(self, re)
-            self._errHandler.recover(self, re)
+            self._errHandler.reportError(self, re) # type: ignore
+            self._errHandler.recover(self, re) # type: ignore
         finally:
             self.exitRule()
         return localctx
@@ -551,7 +549,7 @@ class SQNParser ( Parser ):
     class LiteralContext(ParserRuleContext):
         __slots__ = 'parser'
 
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1): # type: ignore
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -581,15 +579,15 @@ class SQNParser ( Parser ):
 
         def enterRule(self, listener:ParseTreeListener):
             if hasattr( listener, "enterLiteral" ):
-                listener.enterLiteral(self)
+                listener.enterLiteral(self) # type: ignore
 
         def exitRule(self, listener:ParseTreeListener):
             if hasattr( listener, "exitLiteral" ):
-                listener.exitLiteral(self)
+                listener.exitLiteral(self) # type: ignore
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitLiteral" ):
-                return visitor.visitLiteral(self)
+                return visitor.visitLiteral(self) # type: ignore
             else:
                 return visitor.visitChildren(self)
 
@@ -598,22 +596,22 @@ class SQNParser ( Parser ):
 
     def literal(self):
 
-        localctx = SQNParser.LiteralContext(self, self._ctx, self.state)
+        localctx = SQNParser.LiteralContext(self, self._ctx, self.state) # type: ignore
         self.enterRule(localctx, 10, self.RULE_literal)
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 80
-            _la = self._input.LA(1)
+            _la = self._input.LA(1) # type: ignore
             if not((((_la) & ~0x3f) == 0 and ((1 << _la) & 508) != 0)):
-                self._errHandler.recoverInline(self)
+                self._errHandler.recoverInline(self) # type: ignore
             else:
-                self._errHandler.reportMatch(self)
+                self._errHandler.reportMatch(self) # type: ignore
                 self.consume()
         except RecognitionException as re:
             localctx.exception = re
-            self._errHandler.reportError(self, re)
-            self._errHandler.recover(self, re)
+            self._errHandler.reportError(self, re) # type: ignore
+            self._errHandler.recover(self, re) # type: ignore
         finally:
             self.exitRule()
         return localctx
@@ -622,7 +620,7 @@ class SQNParser ( Parser ):
     class TypeSpecContext(ParserRuleContext):
         __slots__ = 'parser'
 
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1): # type: ignore
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -649,15 +647,15 @@ class SQNParser ( Parser ):
 
         def enterRule(self, listener:ParseTreeListener):
             if hasattr( listener, "enterTypeSpec" ):
-                listener.enterTypeSpec(self)
+                listener.enterTypeSpec(self) # type: ignore
 
         def exitRule(self, listener:ParseTreeListener):
             if hasattr( listener, "exitTypeSpec" ):
-                listener.exitTypeSpec(self)
+                listener.exitTypeSpec(self) # type: ignore
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitTypeSpec" ):
-                return visitor.visitTypeSpec(self)
+                return visitor.visitTypeSpec(self) # type: ignore
             else:
                 return visitor.visitChildren(self)
 
@@ -666,22 +664,22 @@ class SQNParser ( Parser ):
 
     def typeSpec(self):
 
-        localctx = SQNParser.TypeSpecContext(self, self._ctx, self.state)
+        localctx = SQNParser.TypeSpecContext(self, self._ctx, self.state) # type: ignore
         self.enterRule(localctx, 12, self.RULE_typeSpec)
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 82
-            _la = self._input.LA(1)
+            _la = self._input.LA(1) # type: ignore
             if not((((_la) & ~0x3f) == 0 and ((1 << _la) & 32256) != 0)):
-                self._errHandler.recoverInline(self)
+                self._errHandler.recoverInline(self) # type: ignore
             else:
-                self._errHandler.reportMatch(self)
+                self._errHandler.reportMatch(self) # type: ignore
                 self.consume()
         except RecognitionException as re:
             localctx.exception = re
-            self._errHandler.reportError(self, re)
-            self._errHandler.recover(self, re)
+            self._errHandler.reportError(self, re) # type: ignore
+            self._errHandler.recover(self, re) # type: ignore
         finally:
             self.exitRule()
         return localctx
@@ -690,7 +688,7 @@ class SQNParser ( Parser ):
     class DmlContext(ParserRuleContext):
         __slots__ = 'parser'
 
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1): # type: ignore
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -698,7 +696,7 @@ class SQNParser ( Parser ):
             return self.getTypedRuleContext(SQNParser.Table_definitionContext,0)
 
 
-        def value_entries(self, i:int=None):
+        def value_entries(self, i:int=None): # type: ignore
             if i is None:
                 return self.getTypedRuleContexts(SQNParser.Value_entriesContext)
             else:
@@ -710,15 +708,15 @@ class SQNParser ( Parser ):
 
         def enterRule(self, listener:ParseTreeListener):
             if hasattr( listener, "enterDml" ):
-                listener.enterDml(self)
+                listener.enterDml(self) # type: ignore
 
         def exitRule(self, listener:ParseTreeListener):
             if hasattr( listener, "exitDml" ):
-                listener.exitDml(self)
+                listener.exitDml(self) # type: ignore
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitDml" ):
-                return visitor.visitDml(self)
+                return visitor.visitDml(self) # type: ignore
             else:
                 return visitor.visitChildren(self)
 
@@ -727,7 +725,7 @@ class SQNParser ( Parser ):
 
     def dml(self):
 
-        localctx = SQNParser.DmlContext(self, self._ctx, self.state)
+        localctx = SQNParser.DmlContext(self, self._ctx, self.state) # type: ignore
         self.enterRule(localctx, 14, self.RULE_dml)
         self._la = 0 # Token type
         try:
@@ -735,21 +733,21 @@ class SQNParser ( Parser ):
             self.state = 84
             self.table_definition()
             self.state = 86 
-            self._errHandler.sync(self)
-            _la = self._input.LA(1)
+            self._errHandler.sync(self) # type: ignore
+            _la = self._input.LA(1) # type: ignore
             while True:
                 self.state = 85
                 self.value_entries()
                 self.state = 88 
-                self._errHandler.sync(self)
-                _la = self._input.LA(1)
+                self._errHandler.sync(self) # type: ignore
+                _la = self._input.LA(1) # type: ignore
                 if not (_la==36):
                     break
 
         except RecognitionException as re:
             localctx.exception = re
-            self._errHandler.reportError(self, re)
-            self._errHandler.recover(self, re)
+            self._errHandler.reportError(self, re) # type: ignore
+            self._errHandler.recover(self, re) # type: ignore
         finally:
             self.exitRule()
         return localctx
@@ -758,7 +756,7 @@ class SQNParser ( Parser ):
     class Table_definitionContext(ParserRuleContext):
         __slots__ = 'parser'
 
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1): # type: ignore
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -769,7 +767,7 @@ class SQNParser ( Parser ):
         def LPAREN(self):
             return self.getToken(SQNParser.LPAREN, 0)
 
-        def column_name(self, i:int=None):
+        def column_name(self, i:int=None): # type: ignore
             if i is None:
                 return self.getTypedRuleContexts(SQNParser.Column_nameContext)
             else:
@@ -779,7 +777,7 @@ class SQNParser ( Parser ):
         def RPAREN(self):
             return self.getToken(SQNParser.RPAREN, 0)
 
-        def COMMA(self, i:int=None):
+        def COMMA(self, i:int=None): # type: ignore
             if i is None:
                 return self.getTokens(SQNParser.COMMA)
             else:
@@ -790,15 +788,15 @@ class SQNParser ( Parser ):
 
         def enterRule(self, listener:ParseTreeListener):
             if hasattr( listener, "enterTable_definition" ):
-                listener.enterTable_definition(self)
+                listener.enterTable_definition(self) # type: ignore
 
         def exitRule(self, listener:ParseTreeListener):
             if hasattr( listener, "exitTable_definition" ):
-                listener.exitTable_definition(self)
+                listener.exitTable_definition(self) # type: ignore
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitTable_definition" ):
-                return visitor.visitTable_definition(self)
+                return visitor.visitTable_definition(self) # type: ignore
             else:
                 return visitor.visitChildren(self)
 
@@ -807,7 +805,7 @@ class SQNParser ( Parser ):
 
     def table_definition(self):
 
-        localctx = SQNParser.Table_definitionContext(self, self._ctx, self.state)
+        localctx = SQNParser.Table_definitionContext(self, self._ctx, self.state) # type: ignore
         self.enterRule(localctx, 16, self.RULE_table_definition)
         self._la = 0 # Token type
         try:
@@ -819,23 +817,23 @@ class SQNParser ( Parser ):
             self.state = 92
             self.column_name()
             self.state = 97
-            self._errHandler.sync(self)
-            _la = self._input.LA(1)
+            self._errHandler.sync(self) # type: ignore
+            _la = self._input.LA(1) # type: ignore
             while _la==20:
                 self.state = 93
                 self.match(SQNParser.COMMA)
                 self.state = 94
                 self.column_name()
                 self.state = 99
-                self._errHandler.sync(self)
-                _la = self._input.LA(1)
+                self._errHandler.sync(self) # type: ignore
+                _la = self._input.LA(1) # type: ignore
 
             self.state = 100
             self.match(SQNParser.RPAREN)
         except RecognitionException as re:
             localctx.exception = re
-            self._errHandler.reportError(self, re)
-            self._errHandler.recover(self, re)
+            self._errHandler.reportError(self, re) # type: ignore
+            self._errHandler.recover(self, re) # type: ignore
         finally:
             self.exitRule()
         return localctx
@@ -844,7 +842,7 @@ class SQNParser ( Parser ):
     class Value_entriesContext(ParserRuleContext):
         __slots__ = 'parser'
 
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1): # type: ignore
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -854,7 +852,7 @@ class SQNParser ( Parser ):
         def LPAREN(self):
             return self.getToken(SQNParser.LPAREN, 0)
 
-        def value(self, i:int=None):
+        def value(self, i:int=None): # type: ignore
             if i is None:
                 return self.getTypedRuleContexts(SQNParser.ValueContext)
             else:
@@ -864,7 +862,7 @@ class SQNParser ( Parser ):
         def RPAREN(self):
             return self.getToken(SQNParser.RPAREN, 0)
 
-        def COMMA(self, i:int=None):
+        def COMMA(self, i:int=None): # type: ignore
             if i is None:
                 return self.getTokens(SQNParser.COMMA)
             else:
@@ -875,15 +873,15 @@ class SQNParser ( Parser ):
 
         def enterRule(self, listener:ParseTreeListener):
             if hasattr( listener, "enterValue_entries" ):
-                listener.enterValue_entries(self)
+                listener.enterValue_entries(self) # type: ignore
 
         def exitRule(self, listener:ParseTreeListener):
             if hasattr( listener, "exitValue_entries" ):
-                listener.exitValue_entries(self)
+                listener.exitValue_entries(self) # type: ignore
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitValue_entries" ):
-                return visitor.visitValue_entries(self)
+                return visitor.visitValue_entries(self) # type: ignore
             else:
                 return visitor.visitChildren(self)
 
@@ -892,7 +890,7 @@ class SQNParser ( Parser ):
 
     def value_entries(self):
 
-        localctx = SQNParser.Value_entriesContext(self, self._ctx, self.state)
+        localctx = SQNParser.Value_entriesContext(self, self._ctx, self.state) # type: ignore
         self.enterRule(localctx, 18, self.RULE_value_entries)
         self._la = 0 # Token type
         try:
@@ -904,23 +902,23 @@ class SQNParser ( Parser ):
             self.state = 104
             self.value()
             self.state = 109
-            self._errHandler.sync(self)
-            _la = self._input.LA(1)
+            self._errHandler.sync(self) # type: ignore
+            _la = self._input.LA(1) # type: ignore
             while _la==20:
                 self.state = 105
                 self.match(SQNParser.COMMA)
                 self.state = 106
                 self.value()
                 self.state = 111
-                self._errHandler.sync(self)
-                _la = self._input.LA(1)
+                self._errHandler.sync(self) # type: ignore
+                _la = self._input.LA(1) # type: ignore
 
             self.state = 112
             self.match(SQNParser.RPAREN)
         except RecognitionException as re:
             localctx.exception = re
-            self._errHandler.reportError(self, re)
-            self._errHandler.recover(self, re)
+            self._errHandler.reportError(self, re) # type: ignore
+            self._errHandler.recover(self, re) # type: ignore
         finally:
             self.exitRule()
         return localctx
@@ -929,7 +927,7 @@ class SQNParser ( Parser ):
     class Table_nameContext(ParserRuleContext):
         __slots__ = 'parser'
 
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1): # type: ignore
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -941,15 +939,15 @@ class SQNParser ( Parser ):
 
         def enterRule(self, listener:ParseTreeListener):
             if hasattr( listener, "enterTable_name" ):
-                listener.enterTable_name(self)
+                listener.enterTable_name(self) # type: ignore
 
         def exitRule(self, listener:ParseTreeListener):
             if hasattr( listener, "exitTable_name" ):
-                listener.exitTable_name(self)
+                listener.exitTable_name(self) # type: ignore
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitTable_name" ):
-                return visitor.visitTable_name(self)
+                return visitor.visitTable_name(self) # type: ignore
             else:
                 return visitor.visitChildren(self)
 
@@ -958,7 +956,7 @@ class SQNParser ( Parser ):
 
     def table_name(self):
 
-        localctx = SQNParser.Table_nameContext(self, self._ctx, self.state)
+        localctx = SQNParser.Table_nameContext(self, self._ctx, self.state) # type: ignore
         self.enterRule(localctx, 20, self.RULE_table_name)
         try:
             self.enterOuterAlt(localctx, 1)
@@ -966,8 +964,8 @@ class SQNParser ( Parser ):
             self.match(SQNParser.IDENTIFIER)
         except RecognitionException as re:
             localctx.exception = re
-            self._errHandler.reportError(self, re)
-            self._errHandler.recover(self, re)
+            self._errHandler.reportError(self, re) # type: ignore
+            self._errHandler.recover(self, re) # type: ignore
         finally:
             self.exitRule()
         return localctx
@@ -976,7 +974,7 @@ class SQNParser ( Parser ):
     class Column_nameContext(ParserRuleContext):
         __slots__ = 'parser'
 
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1): # type: ignore
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -988,15 +986,15 @@ class SQNParser ( Parser ):
 
         def enterRule(self, listener:ParseTreeListener):
             if hasattr( listener, "enterColumn_name" ):
-                listener.enterColumn_name(self)
+                listener.enterColumn_name(self) # type: ignore
 
         def exitRule(self, listener:ParseTreeListener):
             if hasattr( listener, "exitColumn_name" ):
-                listener.exitColumn_name(self)
+                listener.exitColumn_name(self) # type: ignore
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitColumn_name" ):
-                return visitor.visitColumn_name(self)
+                return visitor.visitColumn_name(self) # type: ignore
             else:
                 return visitor.visitChildren(self)
 
@@ -1005,7 +1003,7 @@ class SQNParser ( Parser ):
 
     def column_name(self):
 
-        localctx = SQNParser.Column_nameContext(self, self._ctx, self.state)
+        localctx = SQNParser.Column_nameContext(self, self._ctx, self.state) # type: ignore
         self.enterRule(localctx, 22, self.RULE_column_name)
         try:
             self.enterOuterAlt(localctx, 1)
@@ -1013,8 +1011,8 @@ class SQNParser ( Parser ):
             self.match(SQNParser.IDENTIFIER)
         except RecognitionException as re:
             localctx.exception = re
-            self._errHandler.reportError(self, re)
-            self._errHandler.recover(self, re)
+            self._errHandler.reportError(self, re) # type: ignore
+            self._errHandler.recover(self, re) # type: ignore
         finally:
             self.exitRule()
         return localctx
@@ -1023,7 +1021,7 @@ class SQNParser ( Parser ):
     class ValueContext(ParserRuleContext):
         __slots__ = 'parser'
 
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1): # type: ignore
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -1047,15 +1045,15 @@ class SQNParser ( Parser ):
 
         def enterRule(self, listener:ParseTreeListener):
             if hasattr( listener, "enterValue" ):
-                listener.enterValue(self)
+                listener.enterValue(self) # type: ignore
 
         def exitRule(self, listener:ParseTreeListener):
             if hasattr( listener, "exitValue" ):
-                listener.exitValue(self)
+                listener.exitValue(self) # type: ignore
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitValue" ):
-                return visitor.visitValue(self)
+                return visitor.visitValue(self) # type: ignore
             else:
                 return visitor.visitChildren(self)
 
@@ -1064,22 +1062,22 @@ class SQNParser ( Parser ):
 
     def value(self):
 
-        localctx = SQNParser.ValueContext(self, self._ctx, self.state)
+        localctx = SQNParser.ValueContext(self, self._ctx, self.state) # type: ignore
         self.enterRule(localctx, 24, self.RULE_value)
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 118
-            _la = self._input.LA(1)
+            _la = self._input.LA(1) # type: ignore
             if not((((_la) & ~0x3f) == 0 and ((1 << _la) & 412) != 0)):
-                self._errHandler.recoverInline(self)
+                self._errHandler.recoverInline(self) # type: ignore
             else:
-                self._errHandler.reportMatch(self)
+                self._errHandler.reportMatch(self) # type: ignore
                 self.consume()
         except RecognitionException as re:
             localctx.exception = re
-            self._errHandler.reportError(self, re)
-            self._errHandler.recover(self, re)
+            self._errHandler.reportError(self, re) # type: ignore
+            self._errHandler.recover(self, re) # type: ignore
         finally:
             self.exitRule()
         return localctx
@@ -1088,18 +1086,18 @@ class SQNParser ( Parser ):
     class QueryContext(ParserRuleContext):
         __slots__ = 'parser'
 
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1): # type: ignore
             super().__init__(parent, invokingState)
             self.parser = parser
 
-        def tableSelection(self, i:int=None):
+        def tableSelection(self, i:int=None): # type: ignore
             if i is None:
                 return self.getTypedRuleContexts(SQNParser.TableSelectionContext)
             else:
                 return self.getTypedRuleContext(SQNParser.TableSelectionContext,i)
 
 
-        def SEMI(self, i:int=None):
+        def SEMI(self, i:int=None): # type: ignore
             if i is None:
                 return self.getTokens(SQNParser.SEMI)
             else:
@@ -1114,15 +1112,15 @@ class SQNParser ( Parser ):
 
         def enterRule(self, listener:ParseTreeListener):
             if hasattr( listener, "enterQuery" ):
-                listener.enterQuery(self)
+                listener.enterQuery(self) # type: ignore
 
         def exitRule(self, listener:ParseTreeListener):
             if hasattr( listener, "exitQuery" ):
-                listener.exitQuery(self)
+                listener.exitQuery(self) # type: ignore
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitQuery" ):
-                return visitor.visitQuery(self)
+                return visitor.visitQuery(self) # type: ignore
             else:
                 return visitor.visitChildren(self)
 
@@ -1131,7 +1129,7 @@ class SQNParser ( Parser ):
 
     def query(self):
 
-        localctx = SQNParser.QueryContext(self, self._ctx, self.state)
+        localctx = SQNParser.QueryContext(self, self._ctx, self.state) # type: ignore
         self.enterRule(localctx, 26, self.RULE_query)
         self._la = 0 # Token type
         try:
@@ -1139,20 +1137,20 @@ class SQNParser ( Parser ):
             self.state = 120
             self.tableSelection()
             self.state = 125
-            self._errHandler.sync(self)
-            _la = self._input.LA(1)
+            self._errHandler.sync(self) # type: ignore
+            _la = self._input.LA(1) # type: ignore
             while _la==21:
                 self.state = 121
                 self.match(SQNParser.SEMI)
                 self.state = 122
                 self.tableSelection()
                 self.state = 127
-                self._errHandler.sync(self)
-                _la = self._input.LA(1)
+                self._errHandler.sync(self) # type: ignore
+                _la = self._input.LA(1) # type: ignore
 
             self.state = 129
-            self._errHandler.sync(self)
-            _la = self._input.LA(1)
+            self._errHandler.sync(self) # type: ignore
+            _la = self._input.LA(1) # type: ignore
             if _la==22:
                 self.state = 128
                 self.whereClause()
@@ -1160,8 +1158,8 @@ class SQNParser ( Parser ):
 
         except RecognitionException as re:
             localctx.exception = re
-            self._errHandler.reportError(self, re)
-            self._errHandler.recover(self, re)
+            self._errHandler.reportError(self, re) # type: ignore
+            self._errHandler.recover(self, re) # type: ignore
         finally:
             self.exitRule()
         return localctx
@@ -1170,7 +1168,7 @@ class SQNParser ( Parser ):
     class TableSelectionContext(ParserRuleContext):
         __slots__ = 'parser'
 
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1): # type: ignore
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -1190,15 +1188,15 @@ class SQNParser ( Parser ):
 
         def enterRule(self, listener:ParseTreeListener):
             if hasattr( listener, "enterTableSelection" ):
-                listener.enterTableSelection(self)
+                listener.enterTableSelection(self) # type: ignore
 
         def exitRule(self, listener:ParseTreeListener):
             if hasattr( listener, "exitTableSelection" ):
-                listener.exitTableSelection(self)
+                listener.exitTableSelection(self) # type: ignore
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitTableSelection" ):
-                return visitor.visitTableSelection(self)
+                return visitor.visitTableSelection(self) # type: ignore
             else:
                 return visitor.visitChildren(self)
 
@@ -1207,7 +1205,7 @@ class SQNParser ( Parser ):
 
     def tableSelection(self):
 
-        localctx = SQNParser.TableSelectionContext(self, self._ctx, self.state)
+        localctx = SQNParser.TableSelectionContext(self, self._ctx, self.state) # type: ignore
         self.enterRule(localctx, 28, self.RULE_tableSelection)
         try:
             self.enterOuterAlt(localctx, 1)
@@ -1219,8 +1217,8 @@ class SQNParser ( Parser ):
             self.selectColumns()
         except RecognitionException as re:
             localctx.exception = re
-            self._errHandler.reportError(self, re)
-            self._errHandler.recover(self, re)
+            self._errHandler.reportError(self, re) # type: ignore
+            self._errHandler.recover(self, re) # type: ignore
         finally:
             self.exitRule()
         return localctx
@@ -1229,18 +1227,18 @@ class SQNParser ( Parser ):
     class SelectColumnsContext(ParserRuleContext):
         __slots__ = 'parser'
 
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1): # type: ignore
             super().__init__(parent, invokingState)
             self.parser = parser
 
-        def columnName(self, i:int=None):
+        def columnName(self, i:int=None): # type: ignore
             if i is None:
                 return self.getTypedRuleContexts(SQNParser.ColumnNameContext)
             else:
                 return self.getTypedRuleContext(SQNParser.ColumnNameContext,i)
 
 
-        def COMMA(self, i:int=None):
+        def COMMA(self, i:int=None): # type: ignore
             if i is None:
                 return self.getTokens(SQNParser.COMMA)
             else:
@@ -1251,15 +1249,15 @@ class SQNParser ( Parser ):
 
         def enterRule(self, listener:ParseTreeListener):
             if hasattr( listener, "enterSelectColumns" ):
-                listener.enterSelectColumns(self)
+                listener.enterSelectColumns(self) # type: ignore
 
         def exitRule(self, listener:ParseTreeListener):
             if hasattr( listener, "exitSelectColumns" ):
-                listener.exitSelectColumns(self)
+                listener.exitSelectColumns(self) # type: ignore
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitSelectColumns" ):
-                return visitor.visitSelectColumns(self)
+                return visitor.visitSelectColumns(self) # type: ignore
             else:
                 return visitor.visitChildren(self)
 
@@ -1268,7 +1266,7 @@ class SQNParser ( Parser ):
 
     def selectColumns(self):
 
-        localctx = SQNParser.SelectColumnsContext(self, self._ctx, self.state)
+        localctx = SQNParser.SelectColumnsContext(self, self._ctx, self.state) # type: ignore
         self.enterRule(localctx, 30, self.RULE_selectColumns)
         self._la = 0 # Token type
         try:
@@ -1276,21 +1274,21 @@ class SQNParser ( Parser ):
             self.state = 135
             self.columnName()
             self.state = 140
-            self._errHandler.sync(self)
-            _la = self._input.LA(1)
+            self._errHandler.sync(self) # type: ignore
+            _la = self._input.LA(1) # type: ignore
             while _la==20:
                 self.state = 136
                 self.match(SQNParser.COMMA)
                 self.state = 137
                 self.columnName()
                 self.state = 142
-                self._errHandler.sync(self)
-                _la = self._input.LA(1)
+                self._errHandler.sync(self) # type: ignore
+                _la = self._input.LA(1) # type: ignore
 
         except RecognitionException as re:
             localctx.exception = re
-            self._errHandler.reportError(self, re)
-            self._errHandler.recover(self, re)
+            self._errHandler.reportError(self, re) # type: ignore
+            self._errHandler.recover(self, re) # type: ignore
         finally:
             self.exitRule()
         return localctx
@@ -1299,7 +1297,7 @@ class SQNParser ( Parser ):
     class WhereClauseContext(ParserRuleContext):
         __slots__ = 'parser'
 
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1): # type: ignore
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -1315,15 +1313,15 @@ class SQNParser ( Parser ):
 
         def enterRule(self, listener:ParseTreeListener):
             if hasattr( listener, "enterWhereClause" ):
-                listener.enterWhereClause(self)
+                listener.enterWhereClause(self) # type: ignore
 
         def exitRule(self, listener:ParseTreeListener):
             if hasattr( listener, "exitWhereClause" ):
-                listener.exitWhereClause(self)
+                listener.exitWhereClause(self) # type: ignore
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitWhereClause" ):
-                return visitor.visitWhereClause(self)
+                return visitor.visitWhereClause(self) # type: ignore
             else:
                 return visitor.visitChildren(self)
 
@@ -1332,7 +1330,7 @@ class SQNParser ( Parser ):
 
     def whereClause(self):
 
-        localctx = SQNParser.WhereClauseContext(self, self._ctx, self.state)
+        localctx = SQNParser.WhereClauseContext(self, self._ctx, self.state) # type: ignore
         self.enterRule(localctx, 32, self.RULE_whereClause)
         try:
             self.enterOuterAlt(localctx, 1)
@@ -1342,8 +1340,8 @@ class SQNParser ( Parser ):
             self.condition(0)
         except RecognitionException as re:
             localctx.exception = re
-            self._errHandler.reportError(self, re)
-            self._errHandler.recover(self, re)
+            self._errHandler.reportError(self, re) # type: ignore
+            self._errHandler.recover(self, re) # type: ignore
         finally:
             self.exitRule()
         return localctx
@@ -1352,7 +1350,7 @@ class SQNParser ( Parser ):
     class ConditionContext(ParserRuleContext):
         __slots__ = 'parser'
 
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1): # type: ignore
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -1363,7 +1361,7 @@ class SQNParser ( Parser ):
         def LPAREN(self):
             return self.getToken(SQNParser.LPAREN, 0)
 
-        def condition(self, i:int=None):
+        def condition(self, i:int=None): # type: ignore
             if i is None:
                 return self.getTypedRuleContexts(SQNParser.ConditionContext)
             else:
@@ -1384,32 +1382,32 @@ class SQNParser ( Parser ):
 
         def enterRule(self, listener:ParseTreeListener):
             if hasattr( listener, "enterCondition" ):
-                listener.enterCondition(self)
+                listener.enterCondition(self) # type: ignore
 
         def exitRule(self, listener:ParseTreeListener):
             if hasattr( listener, "exitCondition" ):
-                listener.exitCondition(self)
+                listener.exitCondition(self) # type: ignore
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitCondition" ):
-                return visitor.visitCondition(self)
+                return visitor.visitCondition(self) # type: ignore
             else:
                 return visitor.visitChildren(self)
 
 
 
     def condition(self, _p:int=0):
-        _parentctx = self._ctx
+        _parentctx = self._ctx # type: ignore
         _parentState = self.state
-        localctx = SQNParser.ConditionContext(self, self._ctx, _parentState)
+        localctx = SQNParser.ConditionContext(self, self._ctx, _parentState) # type: ignore
         _prevctx = localctx
         _startState = 34
         self.enterRecursionRule(localctx, 34, self.RULE_condition, _p)
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 152
-            self._errHandler.sync(self)
-            token = self._input.LA(1)
+            self._errHandler.sync(self) # type: ignore
+            token = self._input.LA(1) # type: ignore
             if token in [1]:
                 self.state = 147
                 self.predicate()
@@ -1425,23 +1423,23 @@ class SQNParser ( Parser ):
             else:
                 raise NoViableAltException(self)
 
-            self._ctx.stop = self._input.LT(-1)
+            self._ctx.stop = self._input.LT(-1) # type: ignore
             self.state = 162
-            self._errHandler.sync(self)
-            _alt = self._interp.adaptivePredict(self._input,12,self._ctx)
+            self._errHandler.sync(self) # type: ignore
+            _alt = self._interp.adaptivePredict(self._input,12,self._ctx) # type: ignore
             while _alt!=2 and _alt!=ATN.INVALID_ALT_NUMBER:
                 if _alt==1:
-                    if self._parseListeners is not None:
+                    if self._parseListeners is not None: # type: ignore
                         self.triggerExitRuleEvent()
                     _prevctx = localctx
                     self.state = 160
-                    self._errHandler.sync(self)
-                    la_ = self._interp.adaptivePredict(self._input,11,self._ctx)
+                    self._errHandler.sync(self) # type: ignore
+                    la_ = self._interp.adaptivePredict(self._input,11,self._ctx) # type: ignore
                     if la_ == 1:
                         localctx = SQNParser.ConditionContext(self, _parentctx, _parentState)
                         self.pushNewRecursionContext(localctx, _startState, self.RULE_condition)
                         self.state = 154
-                        if not self.precpred(self._ctx, 3):
+                        if not self.precpred(self._ctx, 3): # type: ignore
                             from antlr4.error.Errors import FailedPredicateException
                             raise FailedPredicateException(self, "self.precpred(self._ctx, 3)")
                         self.state = 155
@@ -1454,7 +1452,7 @@ class SQNParser ( Parser ):
                         localctx = SQNParser.ConditionContext(self, _parentctx, _parentState)
                         self.pushNewRecursionContext(localctx, _startState, self.RULE_condition)
                         self.state = 157
-                        if not self.precpred(self._ctx, 2):
+                        if not self.precpred(self._ctx, 2): # type: ignore
                             from antlr4.error.Errors import FailedPredicateException
                             raise FailedPredicateException(self, "self.precpred(self._ctx, 2)")
                         self.state = 158
@@ -1465,13 +1463,13 @@ class SQNParser ( Parser ):
 
              
                 self.state = 164
-                self._errHandler.sync(self)
-                _alt = self._interp.adaptivePredict(self._input,12,self._ctx)
+                self._errHandler.sync(self) # type: ignore
+                _alt = self._interp.adaptivePredict(self._input,12,self._ctx) # type: ignore
 
         except RecognitionException as re:
             localctx.exception = re
-            self._errHandler.reportError(self, re)
-            self._errHandler.recover(self, re)
+            self._errHandler.reportError(self, re) # type: ignore
+            self._errHandler.recover(self, re) # type: ignore
         finally:
             self.unrollRecursionContexts(_parentctx)
         return localctx
@@ -1480,7 +1478,7 @@ class SQNParser ( Parser ):
     class PredicateContext(ParserRuleContext):
         __slots__ = 'parser'
 
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1): # type: ignore
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -1492,7 +1490,7 @@ class SQNParser ( Parser ):
             return self.getTypedRuleContext(SQNParser.OperatorContext,0)
 
 
-        def value(self, i:int=None):
+        def value(self, i:int=None): # type: ignore
             if i is None:
                 return self.getTypedRuleContexts(SQNParser.ValueContext)
             else:
@@ -1514,7 +1512,7 @@ class SQNParser ( Parser ):
         def RPAREN(self):
             return self.getToken(SQNParser.RPAREN, 0)
 
-        def COMMA(self, i:int=None):
+        def COMMA(self, i:int=None): # type: ignore
             if i is None:
                 return self.getTokens(SQNParser.COMMA)
             else:
@@ -1537,15 +1535,15 @@ class SQNParser ( Parser ):
 
         def enterRule(self, listener:ParseTreeListener):
             if hasattr( listener, "enterPredicate" ):
-                listener.enterPredicate(self)
+                listener.enterPredicate(self) # type: ignore
 
         def exitRule(self, listener:ParseTreeListener):
             if hasattr( listener, "exitPredicate" ):
-                listener.exitPredicate(self)
+                listener.exitPredicate(self) # type: ignore
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitPredicate" ):
-                return visitor.visitPredicate(self)
+                return visitor.visitPredicate(self) # type: ignore
             else:
                 return visitor.visitChildren(self)
 
@@ -1554,13 +1552,13 @@ class SQNParser ( Parser ):
 
     def predicate(self):
 
-        localctx = SQNParser.PredicateContext(self, self._ctx, self.state)
+        localctx = SQNParser.PredicateContext(self, self._ctx, self.state) # type: ignore
         self.enterRule(localctx, 36, self.RULE_predicate)
         self._la = 0 # Token type
         try:
             self.state = 196
-            self._errHandler.sync(self)
-            la_ = self._interp.adaptivePredict(self._input,14,self._ctx)
+            self._errHandler.sync(self) # type: ignore
+            la_ = self._interp.adaptivePredict(self._input,14,self._ctx) # type: ignore
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 165
@@ -1596,16 +1594,16 @@ class SQNParser ( Parser ):
                 self.state = 178
                 self.value()
                 self.state = 183
-                self._errHandler.sync(self)
-                _la = self._input.LA(1)
+                self._errHandler.sync(self) # type: ignore
+                _la = self._input.LA(1) # type: ignore
                 while _la==20:
                     self.state = 179
                     self.match(SQNParser.COMMA)
                     self.state = 180
                     self.value()
                     self.state = 185
-                    self._errHandler.sync(self)
-                    _la = self._input.LA(1)
+                    self._errHandler.sync(self) # type: ignore
+                    _la = self._input.LA(1) # type: ignore
 
                 self.state = 186
                 self.match(SQNParser.RPAREN)
@@ -1634,8 +1632,8 @@ class SQNParser ( Parser ):
 
         except RecognitionException as re:
             localctx.exception = re
-            self._errHandler.reportError(self, re)
-            self._errHandler.recover(self, re)
+            self._errHandler.reportError(self, re) # type: ignore
+            self._errHandler.recover(self, re) # type: ignore
         finally:
             self.exitRule()
         return localctx
@@ -1644,7 +1642,7 @@ class SQNParser ( Parser ):
     class OperatorContext(ParserRuleContext):
         __slots__ = 'parser'
 
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1): # type: ignore
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -1671,15 +1669,15 @@ class SQNParser ( Parser ):
 
         def enterRule(self, listener:ParseTreeListener):
             if hasattr( listener, "enterOperator" ):
-                listener.enterOperator(self)
+                listener.enterOperator(self) # type: ignore
 
         def exitRule(self, listener:ParseTreeListener):
             if hasattr( listener, "exitOperator" ):
-                listener.exitOperator(self)
+                listener.exitOperator(self) # type: ignore
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitOperator" ):
-                return visitor.visitOperator(self)
+                return visitor.visitOperator(self) # type: ignore
             else:
                 return visitor.visitChildren(self)
 
@@ -1688,22 +1686,22 @@ class SQNParser ( Parser ):
 
     def operator(self):
 
-        localctx = SQNParser.OperatorContext(self, self._ctx, self.state)
+        localctx = SQNParser.OperatorContext(self, self._ctx, self.state) # type: ignore
         self.enterRule(localctx, 38, self.RULE_operator)
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 198
-            _la = self._input.LA(1)
+            _la = self._input.LA(1) # type: ignore
             if not((((_la) & ~0x3f) == 0 and ((1 << _la) & 67645734912) != 0)):
-                self._errHandler.recoverInline(self)
+                self._errHandler.recoverInline(self) # type: ignore
             else:
-                self._errHandler.reportMatch(self)
+                self._errHandler.reportMatch(self) # type: ignore
                 self.consume()
         except RecognitionException as re:
             localctx.exception = re
-            self._errHandler.reportError(self, re)
-            self._errHandler.recover(self, re)
+            self._errHandler.reportError(self, re) # type: ignore
+            self._errHandler.recover(self, re) # type: ignore
         finally:
             self.exitRule()
         return localctx
@@ -1712,7 +1710,7 @@ class SQNParser ( Parser ):
     class ColumnNameContext(ParserRuleContext):
         __slots__ = 'parser'
 
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1): # type: ignore
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -1724,15 +1722,15 @@ class SQNParser ( Parser ):
 
         def enterRule(self, listener:ParseTreeListener):
             if hasattr( listener, "enterColumnName" ):
-                listener.enterColumnName(self)
+                listener.enterColumnName(self) # type: ignore
 
         def exitRule(self, listener:ParseTreeListener):
             if hasattr( listener, "exitColumnName" ):
-                listener.exitColumnName(self)
+                listener.exitColumnName(self) # type: ignore
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitColumnName" ):
-                return visitor.visitColumnName(self)
+                return visitor.visitColumnName(self) # type: ignore
             else:
                 return visitor.visitChildren(self)
 
@@ -1741,7 +1739,7 @@ class SQNParser ( Parser ):
 
     def columnName(self):
 
-        localctx = SQNParser.ColumnNameContext(self, self._ctx, self.state)
+        localctx = SQNParser.ColumnNameContext(self, self._ctx, self.state) # type: ignore
         self.enterRule(localctx, 40, self.RULE_columnName)
         try:
             self.enterOuterAlt(localctx, 1)
@@ -1749,8 +1747,8 @@ class SQNParser ( Parser ):
             self.match(SQNParser.IDENTIFIER)
         except RecognitionException as re:
             localctx.exception = re
-            self._errHandler.reportError(self, re)
-            self._errHandler.recover(self, re)
+            self._errHandler.reportError(self, re) # type: ignore
+            self._errHandler.recover(self, re) # type: ignore
         finally:
             self.exitRule()
         return localctx
@@ -1769,11 +1767,11 @@ class SQNParser ( Parser ):
 
     def condition_sempred(self, localctx:ConditionContext, predIndex:int):
             if predIndex == 0:
-                return self.precpred(self._ctx, 3)
+                return self.precpred(self._ctx, 3) # type: ignore
          
 
             if predIndex == 1:
-                return self.precpred(self._ctx, 2)
+                return self.precpred(self._ctx, 2) # type: ignore
          
 
 

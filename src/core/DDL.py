@@ -2,11 +2,8 @@
 # encoding: utf-8
 from antlr4 import *
 from io import StringIO
+from typing import TextIO
 import sys
-if sys.version_info[1] > 5:
-	from typing import TextIO
-else:
-	from typing.io import TextIO
 
 def serializedATN():
     return [
@@ -109,7 +106,7 @@ class DDL ( Parser ):
     class DdlContext(ParserRuleContext):
         __slots__ = 'parser'
 
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1): # type: ignore
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -120,7 +117,7 @@ class DDL ( Parser ):
         def LPAREN(self):
             return self.getToken(DDL.LPAREN, 0)
 
-        def columnDef(self, i:int=None):
+        def columnDef(self, i:int=None): # type: ignore
             if i is None:
                 return self.getTypedRuleContexts(DDL.ColumnDefContext)
             else:
@@ -130,7 +127,7 @@ class DDL ( Parser ):
         def RPAREN(self):
             return self.getToken(DDL.RPAREN, 0)
 
-        def COMMA(self, i:int=None):
+        def COMMA(self, i:int=None): # type: ignore
             if i is None:
                 return self.getTokens(DDL.COMMA)
             else:
@@ -141,15 +138,15 @@ class DDL ( Parser ):
 
         def enterRule(self, listener:ParseTreeListener):
             if hasattr( listener, "enterDdl" ):
-                listener.enterDdl(self)
+                listener.enterDdl(self) # type: ignore
 
         def exitRule(self, listener:ParseTreeListener):
             if hasattr( listener, "exitDdl" ):
-                listener.exitDdl(self)
+                listener.exitDdl(self) # type: ignore
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitDdl" ):
-                return visitor.visitDdl(self)
+                return visitor.visitDdl(self) # type: ignore
             else:
                 return visitor.visitChildren(self)
 
@@ -158,7 +155,7 @@ class DDL ( Parser ):
 
     def ddl(self):
 
-        localctx = DDL.DdlContext(self, self._ctx, self.state)
+        localctx = DDL.DdlContext(self, self._ctx, self.state) # type: ignore
         self.enterRule(localctx, 0, self.RULE_ddl)
         self._la = 0 # Token type
         try:
@@ -170,23 +167,23 @@ class DDL ( Parser ):
             self.state = 12
             self.columnDef()
             self.state = 17
-            self._errHandler.sync(self)
-            _la = self._input.LA(1)
+            self._errHandler.sync(self) # type: ignore
+            _la = self._input.LA(1) # type: ignore
             while _la==20:
                 self.state = 13
                 self.match(DDL.COMMA)
                 self.state = 14
                 self.columnDef()
                 self.state = 19
-                self._errHandler.sync(self)
-                _la = self._input.LA(1)
+                self._errHandler.sync(self) # type: ignore
+                _la = self._input.LA(1) # type: ignore
 
             self.state = 20
             self.match(DDL.RPAREN)
         except RecognitionException as re:
             localctx.exception = re
-            self._errHandler.reportError(self, re)
-            self._errHandler.recover(self, re)
+            self._errHandler.reportError(self, re) # type: ignore
+            self._errHandler.recover(self, re) # type: ignore
         finally:
             self.exitRule()
         return localctx
@@ -195,7 +192,7 @@ class DDL ( Parser ):
     class TableNameContext(ParserRuleContext):
         __slots__ = 'parser'
 
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1): # type: ignore
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -207,15 +204,15 @@ class DDL ( Parser ):
 
         def enterRule(self, listener:ParseTreeListener):
             if hasattr( listener, "enterTableName" ):
-                listener.enterTableName(self)
+                listener.enterTableName(self) # type: ignore
 
         def exitRule(self, listener:ParseTreeListener):
             if hasattr( listener, "exitTableName" ):
-                listener.exitTableName(self)
+                listener.exitTableName(self) # type: ignore
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitTableName" ):
-                return visitor.visitTableName(self)
+                return visitor.visitTableName(self) # type: ignore
             else:
                 return visitor.visitChildren(self)
 
@@ -224,7 +221,7 @@ class DDL ( Parser ):
 
     def tableName(self):
 
-        localctx = DDL.TableNameContext(self, self._ctx, self.state)
+        localctx = DDL.TableNameContext(self, self._ctx, self.state) # type: ignore
         self.enterRule(localctx, 2, self.RULE_tableName)
         try:
             self.enterOuterAlt(localctx, 1)
@@ -232,8 +229,8 @@ class DDL ( Parser ):
             self.match(DDL.IDENTIFIER)
         except RecognitionException as re:
             localctx.exception = re
-            self._errHandler.reportError(self, re)
-            self._errHandler.recover(self, re)
+            self._errHandler.reportError(self, re) # type: ignore
+            self._errHandler.recover(self, re) # type: ignore
         finally:
             self.exitRule()
         return localctx
@@ -242,7 +239,7 @@ class DDL ( Parser ):
     class ColumnDefContext(ParserRuleContext):
         __slots__ = 'parser'
 
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1): # type: ignore
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -267,15 +264,15 @@ class DDL ( Parser ):
 
         def enterRule(self, listener:ParseTreeListener):
             if hasattr( listener, "enterColumnDef" ):
-                listener.enterColumnDef(self)
+                listener.enterColumnDef(self) # type: ignore
 
         def exitRule(self, listener:ParseTreeListener):
             if hasattr( listener, "exitColumnDef" ):
-                listener.exitColumnDef(self)
+                listener.exitColumnDef(self) # type: ignore
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitColumnDef" ):
-                return visitor.visitColumnDef(self)
+                return visitor.visitColumnDef(self) # type: ignore
             else:
                 return visitor.visitChildren(self)
 
@@ -284,12 +281,12 @@ class DDL ( Parser ):
 
     def columnDef(self):
 
-        localctx = DDL.ColumnDefContext(self, self._ctx, self.state)
+        localctx = DDL.ColumnDefContext(self, self._ctx, self.state) # type: ignore
         self.enterRule(localctx, 4, self.RULE_columnDef)
         try:
             self.state = 34
-            self._errHandler.sync(self)
-            token = self._input.LA(1)
+            self._errHandler.sync(self) # type: ignore
+            token = self._input.LA(1) # type: ignore
             if token in [15]:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 24
@@ -324,8 +321,8 @@ class DDL ( Parser ):
 
         except RecognitionException as re:
             localctx.exception = re
-            self._errHandler.reportError(self, re)
-            self._errHandler.recover(self, re)
+            self._errHandler.reportError(self, re) # type: ignore
+            self._errHandler.recover(self, re) # type: ignore
         finally:
             self.exitRule()
         return localctx
@@ -334,7 +331,7 @@ class DDL ( Parser ):
     class LiteralContext(ParserRuleContext):
         __slots__ = 'parser'
 
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1): # type: ignore
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -364,15 +361,15 @@ class DDL ( Parser ):
 
         def enterRule(self, listener:ParseTreeListener):
             if hasattr( listener, "enterLiteral" ):
-                listener.enterLiteral(self)
+                listener.enterLiteral(self) # type: ignore
 
         def exitRule(self, listener:ParseTreeListener):
             if hasattr( listener, "exitLiteral" ):
-                listener.exitLiteral(self)
+                listener.exitLiteral(self) # type: ignore
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitLiteral" ):
-                return visitor.visitLiteral(self)
+                return visitor.visitLiteral(self) # type: ignore
             else:
                 return visitor.visitChildren(self)
 
@@ -381,22 +378,22 @@ class DDL ( Parser ):
 
     def literal(self):
 
-        localctx = DDL.LiteralContext(self, self._ctx, self.state)
+        localctx = DDL.LiteralContext(self, self._ctx, self.state) # type: ignore
         self.enterRule(localctx, 6, self.RULE_literal)
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 36
-            _la = self._input.LA(1)
+            _la = self._input.LA(1) # type: ignore
             if not((((_la) & ~0x3f) == 0 and ((1 << _la) & 508) != 0)):
-                self._errHandler.recoverInline(self)
+                self._errHandler.recoverInline(self) # type: ignore
             else:
-                self._errHandler.reportMatch(self)
+                self._errHandler.reportMatch(self) # type: ignore
                 self.consume()
         except RecognitionException as re:
             localctx.exception = re
-            self._errHandler.reportError(self, re)
-            self._errHandler.recover(self, re)
+            self._errHandler.reportError(self, re) # type: ignore
+            self._errHandler.recover(self, re) # type: ignore
         finally:
             self.exitRule()
         return localctx
@@ -405,7 +402,7 @@ class DDL ( Parser ):
     class TypeSpecContext(ParserRuleContext):
         __slots__ = 'parser'
 
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1): # type: ignore
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -432,15 +429,15 @@ class DDL ( Parser ):
 
         def enterRule(self, listener:ParseTreeListener):
             if hasattr( listener, "enterTypeSpec" ):
-                listener.enterTypeSpec(self)
+                listener.enterTypeSpec(self) # type: ignore
 
         def exitRule(self, listener:ParseTreeListener):
             if hasattr( listener, "exitTypeSpec" ):
-                listener.exitTypeSpec(self)
+                listener.exitTypeSpec(self) # type: ignore
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitTypeSpec" ):
-                return visitor.visitTypeSpec(self)
+                return visitor.visitTypeSpec(self) # type: ignore
             else:
                 return visitor.visitChildren(self)
 
@@ -449,22 +446,22 @@ class DDL ( Parser ):
 
     def typeSpec(self):
 
-        localctx = DDL.TypeSpecContext(self, self._ctx, self.state)
+        localctx = DDL.TypeSpecContext(self, self._ctx, self.state) # type: ignore
         self.enterRule(localctx, 8, self.RULE_typeSpec)
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 38
-            _la = self._input.LA(1)
+            _la = self._input.LA(1) # type: ignore
             if not((((_la) & ~0x3f) == 0 and ((1 << _la) & 32256) != 0)):
-                self._errHandler.recoverInline(self)
+                self._errHandler.recoverInline(self) # type: ignore
             else:
-                self._errHandler.reportMatch(self)
+                self._errHandler.reportMatch(self) # type: ignore
                 self.consume()
         except RecognitionException as re:
             localctx.exception = re
-            self._errHandler.reportError(self, re)
-            self._errHandler.recover(self, re)
+            self._errHandler.reportError(self, re) # type: ignore
+            self._errHandler.recover(self, re) # type: ignore
         finally:
             self.exitRule()
         return localctx

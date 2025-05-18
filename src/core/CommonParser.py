@@ -2,11 +2,8 @@
 # encoding: utf-8
 from antlr4 import *
 from io import StringIO
+from typing import TextIO
 import sys
-if sys.version_info[1] > 5:
-	from typing import TextIO
-else:
-	from typing.io import TextIO
 
 def serializedATN():
     return [
@@ -97,7 +94,7 @@ class CommonParser ( Parser ):
     class LiteralContext(ParserRuleContext):
         __slots__ = 'parser'
 
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1): # type: ignore
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -127,15 +124,15 @@ class CommonParser ( Parser ):
 
         def enterRule(self, listener:ParseTreeListener):
             if hasattr( listener, "enterLiteral" ):
-                listener.enterLiteral(self)
+                listener.enterLiteral(self) # type: ignore
 
         def exitRule(self, listener:ParseTreeListener):
             if hasattr( listener, "exitLiteral" ):
-                listener.exitLiteral(self)
+                listener.exitLiteral(self) # type: ignore
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitLiteral" ):
-                return visitor.visitLiteral(self)
+                return visitor.visitLiteral(self) # type: ignore
             else:
                 return visitor.visitChildren(self)
 
@@ -144,22 +141,22 @@ class CommonParser ( Parser ):
 
     def literal(self):
 
-        localctx = CommonParser.LiteralContext(self, self._ctx, self.state)
+        localctx = CommonParser.LiteralContext(self, self._ctx, self.state) # type: ignore
         self.enterRule(localctx, 0, self.RULE_literal)
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 4
-            _la = self._input.LA(1)
+            _la = self._input.LA(1) # type: ignore
             if not((((_la) & ~0x3f) == 0 and ((1 << _la) & 508) != 0)):
-                self._errHandler.recoverInline(self)
+                self._errHandler.recoverInline(self) # type: ignore
             else:
-                self._errHandler.reportMatch(self)
+                self._errHandler.reportMatch(self) # type: ignore
                 self.consume()
         except RecognitionException as re:
             localctx.exception = re
-            self._errHandler.reportError(self, re)
-            self._errHandler.recover(self, re)
+            self._errHandler.reportError(self, re) # type: ignore
+            self._errHandler.recover(self, re) # type: ignore
         finally:
             self.exitRule()
         return localctx
@@ -168,7 +165,7 @@ class CommonParser ( Parser ):
     class TypeSpecContext(ParserRuleContext):
         __slots__ = 'parser'
 
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1): # type: ignore
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -195,15 +192,15 @@ class CommonParser ( Parser ):
 
         def enterRule(self, listener:ParseTreeListener):
             if hasattr( listener, "enterTypeSpec" ):
-                listener.enterTypeSpec(self)
+                listener.enterTypeSpec(self) # type: ignore
 
         def exitRule(self, listener:ParseTreeListener):
             if hasattr( listener, "exitTypeSpec" ):
-                listener.exitTypeSpec(self)
+                listener.exitTypeSpec(self) # type: ignore
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitTypeSpec" ):
-                return visitor.visitTypeSpec(self)
+                return visitor.visitTypeSpec(self) # type: ignore
             else:
                 return visitor.visitChildren(self)
 
@@ -212,22 +209,22 @@ class CommonParser ( Parser ):
 
     def typeSpec(self):
 
-        localctx = CommonParser.TypeSpecContext(self, self._ctx, self.state)
+        localctx = CommonParser.TypeSpecContext(self, self._ctx, self.state) # type: ignore
         self.enterRule(localctx, 2, self.RULE_typeSpec)
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 6
-            _la = self._input.LA(1)
+            _la = self._input.LA(1) # type: ignore
             if not((((_la) & ~0x3f) == 0 and ((1 << _la) & 32256) != 0)):
-                self._errHandler.recoverInline(self)
+                self._errHandler.recoverInline(self) # type: ignore
             else:
-                self._errHandler.reportMatch(self)
+                self._errHandler.reportMatch(self) # type: ignore
                 self.consume()
         except RecognitionException as re:
             localctx.exception = re
-            self._errHandler.reportError(self, re)
-            self._errHandler.recover(self, re)
+            self._errHandler.reportError(self, re) # type: ignore
+            self._errHandler.recover(self, re) # type: ignore
         finally:
             self.exitRule()
         return localctx
