@@ -1,15 +1,11 @@
 parser grammar DDL;
 
-import Common;
+import CommonParser;
 
-options { tokenVocab = Common; }
+options { tokenVocab = CommonLexer; }
 
-ddl: tableName '(' columnDef (',' columnDef)* ')';
+ddl: tableName LPAREN columnDef (COMMA columnDef)* RPAREN;
 
 tableName: IDENTIFIER;
 
-columnDef: PK ':' typeSpec | FK ':' typeSpec | STRING ':' typeSpec;
-
-PK: '*';
-
-FK: '@' STRING;
+columnDef: PK COLON typeSpec | FK IDENTIFIER COLON typeSpec | IDENTIFIER COLON typeSpec;

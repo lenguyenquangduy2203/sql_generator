@@ -1,8 +1,8 @@
 grammar SQN;
 
-import DDL, DML, Query, Common;
+import DDL, DML, Query, CommonParser;
 
-options { tokenVocab = Common; }
+options { tokenVocab = CommonLexer; }
 
 program: statement+ EOF;
 statement: ddl | dml | query;

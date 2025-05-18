@@ -1,25 +1,25 @@
 parser grammar Query;
 
-import Common;
+import CommonParser;
 
-options { tokenVocab = Common; }
+options { tokenVocab = CommonLexer; }
 
-query: tableSelection (';' tableSelection)* whereClause?;
+query: tableSelection (SEMI tableSelection)* whereClause?;
 
-tableSelection: tableName '~' selectColumns;
+tableSelection: tableName TILDE selectColumns;
 
-selectColumns: columnName (',' columnName)*;
+selectColumns: columnName (COMMA columnName)*;
 
-whereClause: '?' condition;
+whereClause: QUESTION condition;
 
-condition: predicate| condition 'AND' condition| condition 'OR' condition| '(' condition ')';
+condition: predicate| condition AND condition| condition OR condition| LPAREN condition RPAREN;
 
-predicate: columnName operator value| columnName 'BETWEEN' value 'AND' value| columnName 'IN' '(' value (',' value)* ')'| columnName 'LIKE' STRING| columnName 'IS' 'NULL';
+predicate: columnName operator value| columnName BETWEEN value AND value| columnName IN LPAREN value (COMMA value)* RPAREN| columnName LIKE STRING| columnName IS NULL;
 
-operator: '=' | '!=' | '<' | '>' | '<=' | '>=';
+operator: EQ | NEQ | LT | GT | LE | GE;
 
-value: literal | columnName;
+value: literal | columnName | LPAREN query RPAREN;
 
-columnName: IDENTIFIER ('.' IDENTIFIER)?;
+columnName: IDENTIFIER;
 
 tableName: IDENTIFIER;

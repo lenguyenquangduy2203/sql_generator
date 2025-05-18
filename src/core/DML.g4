@@ -1,15 +1,15 @@
 parser grammar DML;
 
-import Common;
-options { tokenVocab = Common; }
+import CommonParser;
+options { tokenVocab = CommonLexer; }
 
 dml: table_definition value_entries+;
 
 // Take column name, table name are a must
-table_definition: table_name '(' column_name (',' column_name)* ')';
+table_definition: table_name LPAREN column_name (COMMA column_name)* RPAREN;
 
 // Starts with '<<', followed by a parenthesized list of values
-value_entries: '<<' '(' value (',' value)* ')';
+value_entries: SLF LPAREN value (COMMA value)* RPAREN;
 
 table_name: IDENTIFIER;
 column_name: IDENTIFIER;
