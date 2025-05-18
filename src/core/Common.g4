@@ -18,4 +18,4 @@ parser grammar CommonParser;
 
 literal: INT | FLOAT | STRING | BOOLEAN | DATE | LONG | NULL | '(' query ')';
 
-typeSpec: 'int' | 'float' | 'string' | 'boolean' | 'long' | 'date' | 'null';
+typeSpec: 'int' | 'float' | 'string' | 'boolean' | 'long' | 'date' ;
