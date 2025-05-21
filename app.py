@@ -33,6 +33,8 @@ def display_page(pathname):
         return play_ground.layout
     return home.layout  # Default to home page
 
+play_ground.init_play_ground_handler(app)
+
 # Run the app
 if __name__ == '__main__':
     app.run(debug=True)
