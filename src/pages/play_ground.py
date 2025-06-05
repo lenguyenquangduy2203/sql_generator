@@ -1,5 +1,8 @@
 from dash import Input, Output, State, html, dcc
 
+from src.application.SqlGenService import generate_sql
+from src.application.SqlInterpreter import SqlInterpreter
+
 layout = html.Div([
     html.H1("Play Ground", className="header-title"),
     html.P("You can convert SQN into SQL query here.", className="lead mb-4"),
@@ -24,6 +27,8 @@ layout = html.Div([
 ], className="container py-4")
 
 def init_play_ground_handler(app):
+    interpreter = SqlInterpreter()
+
     @app.callback(
         Output('sql-output', 'value'),
         Input('convert-button', 'n_clicks'),
@@ -35,7 +40,12 @@ def init_play_ground_handler(app):
         if not sqn_input:
             return "Please enter an SQN statement."
         
-        # Simulated conversion for demo purposes
-        sql_query = f"-- Converted SQL from SQN:\n{sqn_input}"
+        try:
+            # Attempt to generate SQL from SQN input
+            sql_query = generate_sql(sqn_input, SqlInterpreter())
+        except Exception as e:
+            # Handle exceptions and return the error message
+            sql_query = f"Error: {str(e)}"
+
         return sql_query
     

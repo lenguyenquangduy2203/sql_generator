@@ -8,6 +8,7 @@ from src.core import (
     QueryContext, ColumnDefContext, TypeSpecContext, 
     Table_definitionContext,
 )
+from src.core.contexts import ProgramContext
 from src.models.abstractions import Condition, SQNModel
 from src.models.ddl import DDLModel, ColumnDef, TypeSpec
 from src.models.dml import DMLModel, TableDefinition, ValueEntry
@@ -20,11 +21,19 @@ class SqlInterpreter(SQNVisitor):
         self.columnDef = ColumnDefInterpreter()
         self.typeSpec = TypeSpecInterpreter()
         self.selections = SelectionsInterpreter()
-        self.conditions = ConditionsInterpreter(self)
+        self.conditions = ConditionsInterpreter()
 
     def visit(self, tree) -> list[SQNModel]:
         return super().visit(tree)
     
+    def visitProgram(self, ctx: ProgramContext) -> list[SQNModel]:
+        models = []
+        for stmt in ctx.statement():
+            model = self.visit(stmt)
+            if model:
+                models.append(model)
+        return models
+
     def visitDdl(self, ctx: DdlContext) -> DDLModel:
         table_name: str = ctx.tableName().IDENTIFIER().getText()
         columns: list[ColumnDef] = [self.visitColumnDef(col_ctx) for col_ctx in ctx.columnDef()]
@@ -42,7 +51,7 @@ class SqlInterpreter(SQNVisitor):
         if where_ctx:
             conditions = self.visitCondition(where_ctx.condition())
 
-        return QueryModel(selections, conditions)
+        return QueryModel()
     
     def visitColumnDef(self, ctx: ColumnDefContext) -> ColumnDef:
         column_name: str = self.columnDef.interpret(ctx)
@@ -62,4 +71,4 @@ class SqlInterpreter(SQNVisitor):
         return ValueEntry(ctx.value())
     
     def visitCondition(self, ctx: ConditionContext) -> Condition:
-        return self.conditions.interpret(ctx)
+        return self.conditions.interpret(ctx, self)

@@ -1,11 +1,8 @@
-from src.application.SqlInterpreter import SqlInterpreter
 from src.core import ConditionContext
+from src.core.SQNVisitor import SQNVisitor
 from src.models.query import Predicate
 
 
 class ConditionsInterpreter:
-    def __init__(self, interpreter: SqlInterpreter) -> None:
-        self.interpreter = interpreter
-
-    def interpret(self, ctx: ConditionContext) -> Predicate:
+    def interpret(self, ctx: ConditionContext, interpreter: SQNVisitor) -> Predicate:
         raise NotImplementedError("interpret() logic has not yet been implemented")
