@@ -44,7 +44,7 @@ class ValueEntry(SQNModel):
 
         # Format values into SQL
         formatted_values = ", ".join(
-            str(v) if isinstance(v, (int, float)) else f"'{v}'" if isinstance(v, str) else f"Unsupported({type(v).__name__})"
+            str(v) if isinstance(v, (int, float)) else f"{v}" if isinstance(v, str) else f"Unsupported({type(v).__name__})"
             for v in extracted_values
         )
         return f"({formatted_values})"
