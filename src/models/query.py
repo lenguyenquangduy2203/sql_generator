@@ -1,5 +1,5 @@
 from src.models.abstractions import SQNModel, Condition, Value
-from typing import Any
+from typing import Any, Optional, Dict, List
 
 class PrimitiveType(Value):
     def __init__(self, value: Any):
