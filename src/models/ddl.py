@@ -1,12 +1,21 @@
 from src.models.abstractions import SQNModel
 
+SQL_TYPE_MAP = {
+    "int": "INTEGER",
+    "float": "FLOAT",
+    "string": "TEXT",
+    "boolean": "BOOLEAN",
+    "long": "LONG",
+    "date": "DATE",
+    # Add or modify as needed
+}
 
 class TypeSpec(SQNModel):
     def __init__(self, name: str) -> None:
-        self.name = name
+        self.name = name.lower()
 
     def to_sql(self) -> str:
-        return self.name
+        return SQL_TYPE_MAP.get(self.name, self.name.upper())
 
 
 class ColumnDef(SQNModel):
@@ -24,11 +33,7 @@ class DDLModel(SQNModel):
         self.columns = columns
 
     def to_sql(self) -> str:
-        # Remember to:
-        # '*' -> table_name.lowercaseFirstLetter().concat('Id')
-        # '@Table' -> 'Table.tableId'
         if not self.columns:
             raise ValueError("CREATE TABLE must have at least one column.")
-
-        columns_sql = ",\n  ".join(column.to_sql() for column in self.columns)
+        columns_sql = ",\n  ".join(col.to_sql() for col in self.columns)
         return f"CREATE TABLE {self.table_name} (\n  {columns_sql}\n);"
