@@ -27,48 +27,39 @@ class SqlInterpreter(SQNVisitor):
         return super().visit(tree)
     
     def visitProgram(self, ctx: ProgramContext) -> list[SQNModel]:
-        models = []
-        for stmt in ctx.statement():
-            model = self.visit(stmt)
-            if model:
-                models.append(model)
-        return models
+        return [model for stmt in ctx.statement() if (model := self.visit(stmt))]
 
     def visitDdl(self, ctx: DdlContext) -> DDLModel:
-        table_name: str = ctx.tableName().IDENTIFIER().getText()
-        columns: list[ColumnDef] = [self.visitColumnDef(col_ctx) for col_ctx in ctx.columnDef()]
+        table_name = ctx.tableName().IDENTIFIER().getText()
+        columns = [self.visitColumnDef(c) for c in ctx.columnDef()]
         return DDLModel(table_name, columns)
-    
-    def visitDml(self, ctx: DmlContext) -> DMLModel:
-        definition: TableDefinition = self.visitTable_definition(ctx.table_definition())
-        entries: list[ValueEntry] = [self.visitValue_entries(val_ctx) for val_ctx in ctx.value_entries()]
-        return DMLModel(definition, entries)
-    
-    def visitQuery(self, ctx: QueryContext) -> QueryModel:
-        selections: dict[str, list[str]] = dict(self.selections.interpret(select_ctx) for select_ctx in ctx.tableSelection())
-        where_ctx = ctx.whereClause()
-        conditions: Condition | None = None
-        if where_ctx:
-            conditions = self.visitCondition(where_ctx.condition())
 
-        return QueryModel()
-    
     def visitColumnDef(self, ctx: ColumnDefContext) -> ColumnDef:
-        column_name: str = self.columnDef.interpret(ctx)
-        type_spec: TypeSpec = self.visitTypeSpec(ctx.typeSpec())
-        return ColumnDef(column_name, type_spec)
-    
+        col_name = self.columnDef.interpret(ctx)
+        type_spec = self.visitTypeSpec(ctx.typeSpec())
+        return ColumnDef(col_name, type_spec)
+
     def visitTypeSpec(self, ctx: TypeSpecContext) -> TypeSpec:
-        name: str = self.typeSpec.interpret(ctx)
-        return TypeSpec(name)
-    
+        return TypeSpec(self.typeSpec.interpret(ctx))
+
+    def visitDml(self, ctx: DmlContext) -> DMLModel:
+        definition = self.visitTable_definition(ctx.table_definition())
+        entries = [self.visitValue_entries(e) for e in ctx.value_entries()]
+        return DMLModel(definition, entries)
+
+    def visitQuery(self, ctx: QueryContext) -> QueryModel:
+        selections = dict(self.selections.interpret(sel) for sel in ctx.tableSelection())
+        where_ctx = ctx.whereClause()
+        condition = self.visitCondition(where_ctx.condition()) if where_ctx else None
+        return QueryModel()  # Fill this out based on actual QueryModel implementation
+
     def visitTable_definition(self, ctx: Table_definitionContext) -> TableDefinition:
-        name: str = ctx.table_name().IDENTIFIER().getText()
-        columns: list[str] = [col_ctx.IDENTIFIER().getText() for col_ctx in ctx.column_name()]
+        name = ctx.table_name().IDENTIFIER().getText()
+        columns = [c.IDENTIFIER().getText() for c in ctx.column_name()]
         return TableDefinition(name, columns)
-    
+
     def visitValue_entries(self, ctx: Value_entriesContext) -> ValueEntry:
         return ValueEntry(ctx.value())
-    
+
     def visitCondition(self, ctx: ConditionContext) -> Condition:
         return self.conditions.interpret(ctx, self)
