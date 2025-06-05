@@ -42,7 +42,7 @@ def init_play_ground_handler(app):
         
         try:
             # Attempt to generate SQL from SQN input
-            sql_query = generate_sql(sqn_input, SqlInterpreter())
+            sql_query = generate_sql(sqn_input, interpreter)
         except Exception as e:
             # Handle exceptions and return the error message
             sql_query = f"Error: {str(e)}"
