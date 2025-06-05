@@ -38,7 +38,15 @@ class SqlInterpreter(SQNVisitor):
         table_name: str = ctx.tableName().IDENTIFIER().getText()
         columns: list[ColumnDef] = [self.visitColumnDef(col_ctx) for col_ctx in ctx.columnDef()]
         return DDLModel(table_name, columns)
-    
+
+    def visitColumnDef(self, ctx: ColumnDefContext) -> ColumnDef:
+        col_name = ctx.IDENTIFIER().getText() 
+        type_spec = self.visitTypeSpec(ctx.typeSpec())
+        return ColumnDef(col_name, type_spec)
+
+    def visitTypeSpec(self, ctx: TypeSpecContext) -> TypeSpec:
+        return TypeSpec(str(ctx.getText()) if hasattr(ctx, 'getText') else str(ctx))
+
     def visitDml(self, ctx: DmlContext) -> DMLModel:
         definition: TableDefinition = self.visitTable_definition(ctx.table_definition())
         entries: list[ValueEntry] = [self.visitValue_entries(val_ctx) for val_ctx in ctx.value_entries()]
@@ -47,20 +55,8 @@ class SqlInterpreter(SQNVisitor):
     def visitQuery(self, ctx: QueryContext) -> QueryModel:
         selections: dict[str, list[str]] = dict(self.selections.interpret(select_ctx) for select_ctx in ctx.tableSelection())
         where_ctx = ctx.whereClause()
-        conditions: Condition | None = None
-        if where_ctx:
-            conditions = self.visitCondition(where_ctx.condition())
-
-        return QueryModel()
-    
-    def visitColumnDef(self, ctx: ColumnDefContext) -> ColumnDef:
-        column_name: str = self.columnDef.interpret(ctx)
-        type_spec: TypeSpec = self.visitTypeSpec(ctx.typeSpec())
-        return ColumnDef(column_name, type_spec)
-    
-    def visitTypeSpec(self, ctx: TypeSpecContext) -> TypeSpec:
-        name: str = self.typeSpec.interpret(ctx)
-        return TypeSpec(name)
+        condition = self.visitCondition(where_ctx.condition()) if where_ctx else None
+        return QueryModel(selections, condition)  # Fill this out based on actual QueryModel implementation
     
     def visitTable_definition(self, ctx: Table_definitionContext) -> TableDefinition:
         name: str = ctx.table_name().IDENTIFIER().getText()

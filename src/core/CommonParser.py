@@ -2,13 +2,16 @@
 # encoding: utf-8
 from antlr4 import *
 from io import StringIO
-from typing import TextIO
 import sys
+if sys.version_info[1] > 5:
+	from typing import TextIO
+else:
+	from typing.io import TextIO
 
 def serializedATN():
     return [
-        4,1,37,9,2,0,7,0,2,1,7,1,1,0,1,0,1,1,1,1,1,1,0,0,2,0,2,0,2,1,0,2,
-        8,1,0,9,14,6,0,4,1,0,0,0,2,6,1,0,0,0,4,5,7,0,0,0,5,1,1,0,0,0,6,7,
+        4,1,37,9,2,0,7,0,2,1,7,1,1,0,1,0,1,1,1,1,1,1,0,0,2,0,2,0,2,1,0,1,
+        7,1,0,8,13,6,0,4,1,0,0,0,2,6,1,0,0,0,4,5,7,0,0,0,5,1,1,0,0,0,6,7,
         7,1,0,0,7,3,1,0,0,0,0
     ]
 
@@ -23,20 +26,20 @@ class CommonParser ( Parser ):
     sharedContextCache = PredictionContextCache()
 
     literalNames = [ "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
-                     "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
-                     "'null'", "'int'", "'float'", "'string'", "'boolean'", 
-                     "'long'", "'date'", "'*'", "'@'", "'('", "')'", "':'", 
-                     "','", "';'", "'?'", "'~'", "'and'", "'or'", "'between'", 
-                     "'in'", "'like'", "'is'", "'='", "'!='", "'<'", "'>'", 
-                     "'<='", "'>='", "'<<'" ]
+                     "<INVALID>", "<INVALID>", "<INVALID>", "'null'", "'int'", 
+                     "'float'", "'string'", "'boolean'", "'long'", "'date'", 
+                     "'*'", "'@'", "'('", "')'", "':'", "','", "';'", "'?'", 
+                     "'~'", "'and'", "'or'", "'between'", "'in'", "'like'", 
+                     "'is'", "'='", "'!='", "'<'", "'>'", "'<='", "'>='", 
+                     "'<<'" ]
 
-    symbolicNames = [ "<INVALID>", "IDENTIFIER", "INT", "FLOAT", "STRING", 
-                      "BOOLEAN", "DATE", "LONG", "NULL", "INT_TYPE", "FLOAT_TYPE", 
+    symbolicNames = [ "<INVALID>", "INT", "FLOAT", "STRING", "BOOLEAN", 
+                      "DATE", "LONG", "NULL", "INT_TYPE", "FLOAT_TYPE", 
                       "STRING_TYPE", "BOOLEAN_TYPE", "LONG_TYPE", "DATE_TYPE", 
                       "PK", "FK", "LPAREN", "RPAREN", "COLON", "COMMA", 
                       "SEMI", "QUESTION", "TILDE", "AND", "OR", "BETWEEN", 
                       "IN", "LIKE", "IS", "EQ", "NEQ", "LT", "GT", "LE", 
-                      "GE", "SLF", "WS" ]
+                      "GE", "SLF", "IDENTIFIER", "WS" ]
 
     RULE_literal = 0
     RULE_typeSpec = 1
@@ -44,42 +47,42 @@ class CommonParser ( Parser ):
     ruleNames =  [ "literal", "typeSpec" ]
 
     EOF = Token.EOF
-    IDENTIFIER=1
-    INT=2
-    FLOAT=3
-    STRING=4
-    BOOLEAN=5
-    DATE=6
-    LONG=7
-    NULL=8
-    INT_TYPE=9
-    FLOAT_TYPE=10
-    STRING_TYPE=11
-    BOOLEAN_TYPE=12
-    LONG_TYPE=13
-    DATE_TYPE=14
-    PK=15
-    FK=16
-    LPAREN=17
-    RPAREN=18
-    COLON=19
-    COMMA=20
-    SEMI=21
-    QUESTION=22
-    TILDE=23
-    AND=24
-    OR=25
-    BETWEEN=26
-    IN=27
-    LIKE=28
-    IS=29
-    EQ=30
-    NEQ=31
-    LT=32
-    GT=33
-    LE=34
-    GE=35
-    SLF=36
+    INT=1
+    FLOAT=2
+    STRING=3
+    BOOLEAN=4
+    DATE=5
+    LONG=6
+    NULL=7
+    INT_TYPE=8
+    FLOAT_TYPE=9
+    STRING_TYPE=10
+    BOOLEAN_TYPE=11
+    LONG_TYPE=12
+    DATE_TYPE=13
+    PK=14
+    FK=15
+    LPAREN=16
+    RPAREN=17
+    COLON=18
+    COMMA=19
+    SEMI=20
+    QUESTION=21
+    TILDE=22
+    AND=23
+    OR=24
+    BETWEEN=25
+    IN=26
+    LIKE=27
+    IS=28
+    EQ=29
+    NEQ=30
+    LT=31
+    GT=32
+    LE=33
+    GE=34
+    SLF=35
+    IDENTIFIER=36
     WS=37
 
     def __init__(self, input:TokenStream, output:TextIO = sys.stdout):
@@ -94,7 +97,7 @@ class CommonParser ( Parser ):
     class LiteralContext(ParserRuleContext):
         __slots__ = 'parser'
 
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1): # type: ignore
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -124,15 +127,15 @@ class CommonParser ( Parser ):
 
         def enterRule(self, listener:ParseTreeListener):
             if hasattr( listener, "enterLiteral" ):
-                listener.enterLiteral(self) # type: ignore
+                listener.enterLiteral(self)
 
         def exitRule(self, listener:ParseTreeListener):
             if hasattr( listener, "exitLiteral" ):
-                listener.exitLiteral(self) # type: ignore
+                listener.exitLiteral(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitLiteral" ):
-                return visitor.visitLiteral(self) # type: ignore
+                return visitor.visitLiteral(self)
             else:
                 return visitor.visitChildren(self)
 
@@ -141,22 +144,22 @@ class CommonParser ( Parser ):
 
     def literal(self):
 
-        localctx = CommonParser.LiteralContext(self, self._ctx, self.state) # type: ignore
+        localctx = CommonParser.LiteralContext(self, self._ctx, self.state)
         self.enterRule(localctx, 0, self.RULE_literal)
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 4
-            _la = self._input.LA(1) # type: ignore
-            if not((((_la) & ~0x3f) == 0 and ((1 << _la) & 508) != 0)):
-                self._errHandler.recoverInline(self) # type: ignore
+            _la = self._input.LA(1)
+            if not((((_la) & ~0x3f) == 0 and ((1 << _la) & 254) != 0)):
+                self._errHandler.recoverInline(self)
             else:
-                self._errHandler.reportMatch(self) # type: ignore
+                self._errHandler.reportMatch(self)
                 self.consume()
         except RecognitionException as re:
             localctx.exception = re
-            self._errHandler.reportError(self, re) # type: ignore
-            self._errHandler.recover(self, re) # type: ignore
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
         finally:
             self.exitRule()
         return localctx
@@ -165,7 +168,7 @@ class CommonParser ( Parser ):
     class TypeSpecContext(ParserRuleContext):
         __slots__ = 'parser'
 
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1): # type: ignore
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -192,15 +195,15 @@ class CommonParser ( Parser ):
 
         def enterRule(self, listener:ParseTreeListener):
             if hasattr( listener, "enterTypeSpec" ):
-                listener.enterTypeSpec(self) # type: ignore
+                listener.enterTypeSpec(self)
 
         def exitRule(self, listener:ParseTreeListener):
             if hasattr( listener, "exitTypeSpec" ):
-                listener.exitTypeSpec(self) # type: ignore
+                listener.exitTypeSpec(self)
 
         def accept(self, visitor:ParseTreeVisitor):
             if hasattr( visitor, "visitTypeSpec" ):
-                return visitor.visitTypeSpec(self) # type: ignore
+                return visitor.visitTypeSpec(self)
             else:
                 return visitor.visitChildren(self)
 
@@ -209,22 +212,22 @@ class CommonParser ( Parser ):
 
     def typeSpec(self):
 
-        localctx = CommonParser.TypeSpecContext(self, self._ctx, self.state) # type: ignore
+        localctx = CommonParser.TypeSpecContext(self, self._ctx, self.state)
         self.enterRule(localctx, 2, self.RULE_typeSpec)
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 6
-            _la = self._input.LA(1) # type: ignore
-            if not((((_la) & ~0x3f) == 0 and ((1 << _la) & 32256) != 0)):
-                self._errHandler.recoverInline(self) # type: ignore
+            _la = self._input.LA(1)
+            if not((((_la) & ~0x3f) == 0 and ((1 << _la) & 16128) != 0)):
+                self._errHandler.recoverInline(self)
             else:
-                self._errHandler.reportMatch(self) # type: ignore
+                self._errHandler.reportMatch(self)
                 self.consume()
         except RecognitionException as re:
             localctx.exception = re
-            self._errHandler.reportError(self, re) # type: ignore
-            self._errHandler.recover(self, re) # type: ignore
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
         finally:
             self.exitRule()
         return localctx

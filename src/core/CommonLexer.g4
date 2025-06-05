@@ -1,6 +1,5 @@
 lexer grammar CommonLexer;
 
-IDENTIFIER: [a-zA-Z_][a-zA-Z0-9_]*;
 
 fragment DIGIT: [0-9];
 
@@ -43,4 +42,5 @@ LE: '<=';
 GE: '>=';
 SLF: '<<';
 
+IDENTIFIER: [a-zA-Z_][a-zA-Z0-9_]*;
 WS: [ \t\r\n]+ -> skip;
