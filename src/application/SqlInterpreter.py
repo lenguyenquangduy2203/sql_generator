@@ -27,7 +27,12 @@ class SqlInterpreter(SQNVisitor):
         return super().visit(tree)
 
     def visitProgram(self, ctx: ProgramContext) -> list[SQNModel]:
-        return [model for stmt in ctx.statement() if (model := self.visit(stmt))]
+        models = []
+        for stmt in ctx.statement():
+            model = self.visit(stmt)
+            if model:
+                models.append(model)
+        return models
 
     def visitDdl(self, ctx: DdlContext) -> DDLModel:
         table_name = ctx.tableName().IDENTIFIER().getText()

@@ -5,19 +5,19 @@ from src.models.ddl import TypeSpec, ColumnDef, DDLModel
 class TestDDLModels(unittest.TestCase):
     def test_type_spec_to_sql(self):
         type_spec = TypeSpec("int")
-        self.assertEqual(type_spec.to_sql(), "int")
+        self.assertEqual(type_spec.to_sql(), "INTEGER")
 
         type_spec = TypeSpec("string")
-        self.assertEqual(type_spec.to_sql(), "string")
+        self.assertEqual(type_spec.to_sql(), "TEXT")
 
     def test_column_def_to_sql(self):
         type_spec = TypeSpec("int")
         column_def = ColumnDef("productId", type_spec)
-        self.assertEqual(column_def.to_sql(), "productId int")
+        self.assertEqual(column_def.to_sql(), "productId INTEGER")
 
         type_spec = TypeSpec("string")
         column_def = ColumnDef("productName", type_spec)
-        self.assertEqual(column_def.to_sql(), "productName string")
+        self.assertEqual(column_def.to_sql(), "productName TEXT")
 
     def test_ddl_model_to_sql(self):
         columns = [
@@ -28,9 +28,9 @@ class TestDDLModels(unittest.TestCase):
         ddl_model = DDLModel("Product", columns)
         expected_sql = (
             "CREATE TABLE Product (\n"
-            "  productId int,\n"
-            "  productName string,\n"
-            "  price float\n"
+            "  productId INTEGER,\n"
+            "  productName TEXT,\n"
+            "  price FLOAT\n"
             ");"
         )
         self.assertEqual(ddl_model.to_sql(), expected_sql)
